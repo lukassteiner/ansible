@@ -1,0 +1,6 @@
+---
+- name: Install german language package
+  apt:
+    pkg=language-pack-de
+    state=installed
+    update_cache=true

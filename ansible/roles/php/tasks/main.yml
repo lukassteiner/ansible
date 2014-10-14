@@ -1,0 +1,8 @@
+---
+- name: Install PHP5
+  apt:
+    pkg=php5
+    state=installed
+    update_cache=true
+  notify:
+    - start apache

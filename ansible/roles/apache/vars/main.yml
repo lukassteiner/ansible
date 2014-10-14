@@ -1,0 +1,5 @@
+apache_vhosts:
+  - servername: "vhost1.example.com"
+    serveradmin: "support@websoft.ch"
+    sourceDir : "/example"
+    relDestDir : "public"

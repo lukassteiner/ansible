@@ -1,9 +1,53 @@
 ---
 - name: Installs apache web server
-  apt: pkg=apache2 state=installed update_cache=true
+  apt:
+    pkg=apache2
+    state=installed
+    update_cache=true
   notify:
     - start apache
 
-- name: Upload default index.html for host
-  copy: src=index.html dest=/var/www/html/ mode=0644
+- name: Create a VirtualHost file for each enabled VirtualHost
+  template:
+    src=apache_vhost.conf
+    dest=/etc/apache2/sites-available/{{ item.servername }}.conf
+    owner=root
+    group=root
+    mode=0644
+  with_items: apache_vhosts
+  notify:
+          - restart apache
 
+- name: Link source for each VirtualHost
+  file:
+    src={{ item.sourceDir }}
+    dest=/var/www/{{ item.servername }}
+    owner=www-data
+    group=www-data
+    state=link
+  with_items: apache_vhosts
+
+- name: Create log directory for each VirtualHost
+  file:
+    path=/var/log/apache2/{{ item.servername }}
+    owner=www-data
+    group=www-data
+    state=directory
+  with_items: apache_vhosts
+
+- name: Enable rewrite mod
+  command:
+    sudo a2enmod rewrite
+  notify:
+        - restart apache
+
+- name: Enable all VirtualHosts
+  command:
+    sudo a2ensite {{ item.servername }}.conf
+  with_items: apache_vhosts
+
+- name: Disable default VirtualHost
+  command:
+      sudo a2dissite 000-default.conf
+  notify:
+        - restart apache

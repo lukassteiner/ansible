@@ -1,0 +1,9 @@
+---
+- name: Installs apache web server
+  apt: pkg=apache2 state=installed update_cache=true
+  notify:
+    - start apache
+
+- name: Upload default index.html for host
+  copy: src=index.html dest=/var/www/html/ mode=0644
+

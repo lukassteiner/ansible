@@ -1,0 +1,5 @@
+---
+- hosts: droplets
+  user: vagrant
+  roles:
+    - role: apache

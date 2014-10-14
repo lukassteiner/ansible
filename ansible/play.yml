@@ -5,7 +5,7 @@
     host: "messages.services.steiner.vagrant"
 
 - name: Production only
-  hosts: vagrant
+  hosts: droplets
   vars:
       host: "messages.services.steiner.ch"
 

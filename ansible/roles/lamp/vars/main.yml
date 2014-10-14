@@ -1,5 +1,5 @@
 apache_vhosts:
-      - servername: host
+      - servername: "messages.services.steiner.vagrant"
         serveradmin: "support@websoft.ch"
         sourceDir : "/message-service"
         relDestDir : "public"

@@ -7,13 +7,6 @@
   notify:
     - start apache
 
-- name: Copy htaccess
-  copy:
-    src=.htaccess
-    dest=/var/www/{{ vhost_servername }}/{{ vhost_relDestDir }}/.htaccess
-    owner=www-data
-    group=www-data
-
 - name: Create a VirtualHost file for VirtualHost
   template:
     src=apache_vhost.conf
@@ -31,6 +24,13 @@
     owner=www-data
     group=www-data
     state=link
+
+- name: Copy htaccess
+  copy:
+    src=.htaccess
+    dest=/var/www/{{ vhost_servername }}/{{ vhost_relDestDir }}/.htaccess
+    owner=www-data
+    group=www-data
 
 - name: Create log directory for VirtualHost
   file:

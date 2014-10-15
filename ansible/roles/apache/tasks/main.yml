@@ -47,13 +47,12 @@
     - restart apache
 
 - name: Enable VirtualHost
-  apache2_site:
-      state=present
-      name={{ vhost_servername }}.conf
+  command:
+    sudo a2ensite {{ vhost_servername }}.conf
 
 - name: Disable default VirtualHost
-  apache2_site:
-        state=absent
-        name=000-default.conf
+  command:
+      sudo a2dissite 000-default.conf
+
   notify:
     - restart apache

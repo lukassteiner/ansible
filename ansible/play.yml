@@ -1,13 +1,9 @@
 ---
 - name: Vagrant only
   hosts: vagrant
-  vars:
-    host: "messages.services.steiner.vagrant"
 
 - name: Production only
   hosts: droplets
-  vars:
-      host: "messages.services.steiner.ch"
 
 - name: Generic
   hosts: servers

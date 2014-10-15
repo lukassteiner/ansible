@@ -1,6 +1,12 @@
 ---
-- name: Install german language package
+- name: Install system packages
   apt:
-    pkg=language-pack-de
+    pkg={{ item }}
     state=installed
     update_cache=true
+  with_items: systemPackages
+
+- name: Set locale module
+  locale_gen:
+    name=en_US.UTF-8
+    state=present

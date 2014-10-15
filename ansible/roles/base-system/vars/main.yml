@@ -1,0 +1,5 @@
+---
+systemPackages:
+  - 'language-pack-de'
+  - 'git'
+  - 'unzip'

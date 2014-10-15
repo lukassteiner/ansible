@@ -1,0 +1,3 @@
+---
+vhost_servername: "messages.services.steiner.vagrant"
+vhost_sourceDir : "/message-service"

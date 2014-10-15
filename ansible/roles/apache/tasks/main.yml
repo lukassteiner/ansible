@@ -7,47 +7,53 @@
   notify:
     - start apache
 
-- name: Create a VirtualHost file for each enabled VirtualHost
+- name: Copy htaccess
+  copy:
+    src=.htaccess
+    dest=/var/www/{{ vhost_servername }}/{{ vhost_relDestDir }}/.htaccess
+    owner=www-data
+    group=www-data
+
+- name: Create a VirtualHost file for VirtualHost
   template:
     src=apache_vhost.conf
-    dest=/etc/apache2/sites-available/{{ item.servername }}.conf
+    dest=/etc/apache2/sites-available/{{ vhost_servername }}.conf
     owner=root
     group=root
     mode=0644
-  with_items: apache_vhosts
   notify:
-          - restart apache
+    - restart apache
 
-- name: Link source for each VirtualHost
+- name: Link source for VirtualHost
   file:
-    src={{ item.sourceDir }}
-    dest=/var/www/{{ item.servername }}
+    src={{ vhost_sourceDir }}
+    dest=/var/www/{{ vhost_servername }}
     owner=www-data
     group=www-data
     state=link
-  with_items: apache_vhosts
 
-- name: Create log directory for each VirtualHost
+- name: Create log directory for VirtualHost
   file:
-    path=/var/log/apache2/{{ item.servername }}
+    path=/var/log/apache2/{{ vhost_servername }}
     owner=www-data
     group=www-data
     state=directory
-  with_items: apache_vhosts
 
 - name: Enable rewrite mod
-  command:
-    sudo a2enmod rewrite
+  apache2_module:
+    state=present
+    name=rewrite
   notify:
-        - restart apache
+    - restart apache
 
-- name: Enable all VirtualHosts
-  command:
-    sudo a2ensite {{ item.servername }}.conf
-  with_items: apache_vhosts
+- name: Enable VirtualHost
+  apache2_site:
+      state=present
+      name={{ vhost_servername }}.conf
 
 - name: Disable default VirtualHost
-  command:
-      sudo a2dissite 000-default.conf
+  apache2_site:
+        state=absent
+        name=000-default.conf
   notify:
-        - restart apache
+    - restart apache

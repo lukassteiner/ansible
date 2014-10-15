@@ -1,5 +1,5 @@
-apache_vhosts:
-      - servername: "messages.services.steiner.vagrant"
-        serveradmin: "support@websoft.ch"
-        sourceDir : "/message-service"
-        relDestDir : "public"
+---
+#vhost_servername: "example.websoft.vagrant" -> needs to be set in group_vars
+#vhost_sourceDir : "/message-service" -> needs to be set in group_vars
+vhost_serveradmin: "support@websoft.ch"
+vhost_relDestDir : "public"

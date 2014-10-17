@@ -10,3 +10,11 @@
   locale_gen:
     name=en_US.UTF-8
     state=present
+
+- name: Set .bash_profile
+  template:
+    src=.bash_profile
+    dest=/home/vagrant
+    owner=vagrant
+    group=vagrant
+    mode=0644

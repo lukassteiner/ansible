@@ -2,4 +2,4 @@
 dependencies:
   - { role: apache }
   - { role: php }
-  - { role: mysql-server }
+  - { role: bennojoy.mysql }

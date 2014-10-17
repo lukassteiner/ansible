@@ -1,0 +1,3 @@
+---
+dependencies:
+  - { role: MaximeThoonsen.php5-xdebug }

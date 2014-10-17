@@ -9,4 +9,4 @@
   hosts: servers
   roles:
     - role: base-system
-    - role: lamp
+    - role: message-service

@@ -1,0 +1,18 @@
+---
+#vhost_servername: "example.websoft.vagrant" -> needs to be set in group_vars
+#vhost_sourceDir : "/message-service" -> needs to be set in group_vars
+vhost_serveradmin: "support@websoft.ch"
+vhost_relDestDir : "public"
+
+
+mysql_db:
+  - name: messages_db
+    replicate: no
+
+mysql_users:
+  - name: messages_dba
+    pass: lbiiQ8-XiM32
+    priv: "messages_db.*:ALL"
+
+php_xdebug_remote_log: /message-service/log/xdebug.log
+php_xdebug_remote_host: 10.0.2.2

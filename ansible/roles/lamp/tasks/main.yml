@@ -1,1 +1,6 @@
 ---
+- name: Install php5-mysql
+  apt:
+    pkg=php5-mysql
+    state=installed
+    update_cache=true

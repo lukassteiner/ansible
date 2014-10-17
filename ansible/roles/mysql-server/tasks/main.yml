@@ -1,8 +1,0 @@
----
-- name: Install mysql server
-  apt:
-    pkg=mysql-server
-    state=installed
-    update_cache=true
-  notify:
-    - start mysqld

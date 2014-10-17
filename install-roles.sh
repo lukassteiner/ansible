@@ -3,8 +3,9 @@ BASE_DIR="/etc/ansible/roles/"
 INSTALL_PATH="/usr/local/etc/ansible/roles/"
 
 roles=(
-    "andyceo.preconf",
-    "andyceo.apache"
+    "MaximeThoonsen.php5-xdebug",
+    "bennojoy.mysql",
+    "pbuyle.php-pecl"
   )
 
 for i in "${roles[@]}"

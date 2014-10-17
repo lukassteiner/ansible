@@ -6,3 +6,16 @@
     update_cache=true
   notify:
     - start apache
+
+- name: Install PHP Packages
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items: php_packages
+
+- name: download composer
+  shell: curl -s http://getcomposer.org/installer | php
+  tags: composer
+
+- name: move composer
+  shell: sudo mv composer.phar /usr/local/bin/composer
+  tags: composer
